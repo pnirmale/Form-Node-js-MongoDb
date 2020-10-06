@@ -1,0 +1,23 @@
+<div>
+    <a href="/getdetails">Get Details</a>
+    </div>
+    <hr>
+    
+    <% if(details!=null) { %>
+    <table>
+    <tr>
+        <th>Name</th>
+        <th>email </th>
+        <th>Password</th>
+        <th>Phone</th>
+    </tr>
+    <% details.forEach(function(item){ %>
+    <tr>
+        <td><%= item.name%></td>
+        <td><%= item.email %></td>
+        <td><%= item.password%></td>
+        <td><%= item.phone %></td>
+    </tr>
+    <% }) %>
+    </table>
+    <% } %>
