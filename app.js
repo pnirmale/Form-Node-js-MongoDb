@@ -10,14 +10,20 @@ db.once('open', function(callback){
 }) 
 
 var app=express() 
+var schema = new mongoose.Schema({
+	name:String,
+	email:String,
+	pass:String,
+	phone:String,
 
-
+  }) 
+var detailsModel = mongoose.model("detailsModel", schema);
 app.use(bodyParser.json()); 
 app.use(express.static(__dirname));
 app.use(bodyParser.urlencoded({ 
 	extended: true
 })); 
-
+app.set('view engine', 'ejs');
 app.post('/sign_up', function(req,res){ 
 	var name = req.body.name; 
 	var email =req.body.email; 
@@ -63,6 +69,15 @@ res.set({
 	}); 
 return res.redirect('index.html'); 
 }).listen(3000) 
-
-
+app.get('/getdetails',function(req,res){
+	detailsModel.find({}, function (err, allDetails) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.render("display", { details: allDetails })
+		}
+	})
+	
+});
+///prathameshhhhhhhh
 console.log("server listening at port 3000"); 
